@@ -1,0 +1,718 @@
+/* ============================================================
+   АДАПТИВНАЯ ВЁРСТКА
+   Брейкпоинты:
+     > 1100px — десктоп (базовые стили в файлах секций)
+     ≤ 1100px — планшет / узкий ноутбук
+     ≤ 768px  — телефон landscape / маленький планшет
+     ≤ 480px  — телефон portrait
+     ≤ 360px  — узкие экраны (Galaxy Fold, iPhone SE)
+   ============================================================ */
+
+/* ─── Средние экраны: одна колонка проектов ─── */
+@media (max-width: 900px) {
+  .projects-grid {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Планшет и уже ─── */
+@media (max-width: 1100px) {
+  .about-grid {
+    gap: clamp(48px, 8vw, 100px);
+  }
+
+  .about-grid,
+  .contact-wrapper {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .about-right {
+    -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+            order: -1; /* фото выше текста на узких экранах */
+  }
+
+  .about-image,
+  .about-image .glitch-wrap {
+    max-width: min(480px, 88vw);
+  }
+
+  .contact-wrapper {
+    gap: clamp(40px, 6vw, 64px);
+  }
+
+  .projects-grid {
+    margin-top: clamp(40px, 6vw, 64px);
+  }
+}
+
+/* ─── Модалка: планшет и уже ─── */
+@media (max-width: 960px) {
+  .project-modal {
+    padding: 0;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    overflow-x: hidden;
+  }
+
+  .project-modal__shell {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100dvh;
+    border-radius: 0;
+    overflow-x: hidden;
+  }
+
+  .project-modal__frame {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .project-modal__frame::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .project-modal__body {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    max-width: 100%;
+  }
+
+  .project-modal__gallery {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    padding: clamp(16px, 3vw, 28px);
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .project-modal__swiper {
+    max-height: min(48vh, 420px);
+    aspect-ratio: 16 / 10;
+    max-width: 100%;
+  }
+
+  .project-modal__content {
+    overflow-x: hidden;
+    overflow-y: visible;
+    scrollbar-width: none;
+    scrollbar-gutter: auto;
+    -ms-overflow-style: none;
+    max-width: 100%;
+    padding: clamp(20px, 4vw, 32px);
+  }
+
+  .project-modal__content::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .project-modal__nav--prev {
+    left: 12px;
+  }
+
+  .project-modal__nav--next {
+    right: 12px;
+  }
+}
+
+/* ─── Мобильный / маленький планшет ─── */
+@media (max-width: 768px) {
+  .section {
+    padding:
+      clamp(56px, 11vw, 80px)
+      max(clamp(14px, 4vw, 18px), var(--safe-left), var(--safe-right));
+  }
+
+  .section-label {
+    top: calc(24px + var(--safe-top));
+    right: max(20px, var(--safe-right));
+    font-size: 12px;
+    letter-spacing: 0.3em;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 8vw, 48px);
+  }
+
+  .section-title-wrap {
+    margin-bottom: clamp(24px, 5vw, 36px);
+  }
+
+  /* Hero: ослабляем 3D, чтобы контент не обрезался */
+  .layers {
+    -webkit-perspective: 600px;
+            perspective: 600px;
+  }
+
+  .layers__container {
+    -webkit-transform: rotateX(calc(var(--move-y) * 0.4)) rotateY(calc(var(--move-x) * 0.4));
+            transform: rotateX(calc(var(--move-y) * 0.4)) rotateY(calc(var(--move-x) * 0.4));
+  }
+
+  .layer-3 {
+    -webkit-transform: translateZ(120px) scale(0.88);
+            transform: translateZ(120px) scale(0.88);
+  }
+
+  .layer-4 {
+    -webkit-transform: translateZ(130px) scale(0.9);
+            transform: translateZ(130px) scale(0.9);
+  }
+
+  .layer-5 {
+    -webkit-transform: translateZ(200px) scale(0.92);
+            transform: translateZ(200px) scale(0.92);
+  }
+
+  .hero-content {
+    padding: 0 max(16px, var(--safe-left), var(--safe-right));
+  }
+
+  .hero-badge {
+    margin-bottom: 24px;
+    padding: 10px 14px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 7.5vw, 42px);
+    line-height: 1.12;
+  }
+
+  .hero-content__p {
+    margin-top: 16px;
+    font-size: clamp(15px, 3.8vw, 18px);
+    line-height: 1.65;
+  }
+
+  .button-start {
+    margin-top: 20px;
+    padding: 0 18px;
+    line-height: 36px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  /* About */
+  .about-text {
+    font-size: clamp(16px, 4vw, 18px);
+    letter-spacing: 0.02em;
+  }
+
+  .about-image,
+  .about-image .glitch-wrap {
+    max-width: min(380px, 86vw);
+  }
+
+  .terminal-card {
+    margin-top: 28px;
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .typing-text {
+    font-size: 14px;
+    line-height: 1.75;
+    overflow-x: auto; /* длинные строки кода не ломают вёрстку */
+  }
+
+  /* Projects */
+  .project-card {
+    min-height: auto;
+    border-radius: 28px;
+  }
+
+  .project-media {
+    min-height: 200px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-body {
+    padding: 20px 22px 24px;
+  }
+
+  .project-body h3 {
+    font-size: clamp(20px, 5vw, 24px);
+  }
+
+  .project-body p {
+    font-size: 15px;
+  }
+
+  /* Contact */
+  .contact-wrapper {
+    margin-top: 40px;
+  }
+
+  .contact-info p {
+    font-size: clamp(16px, 4vw, 18px);
+    line-height: 1.7;
+  }
+
+  .contact-form {
+    padding: clamp(20px, 4vw, 28px);
+    border-radius: 24px;
+  }
+
+  .input-box {
+    margin-bottom: 32px;
+  }
+
+  .input-box input,
+  .input-box textarea {
+    padding: 16px 0;
+    font-size: 16px; /* предотвращает zoom на iOS */
+  }
+
+  .send-btn {
+    min-height: 52px;
+    padding: 18px;
+  }
+
+  .contact__orb--1 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .contact__orb--2 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .contact__orb--3 {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Footer */
+  .footer {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 20px;
+    padding: 24px max(14px, var(--safe-left), var(--safe-right));
+    text-align: center;
+  }
+
+  .footer__left,
+  .footer__right {
+    -ms-grid-column-align: center;
+        justify-self: center;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .footer__social-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Модалка проекта */
+  .project-modal__top {
+    padding:
+      calc(12px + var(--safe-top))
+      max(14px, var(--safe-right))
+      12px
+      max(14px, var(--safe-left));
+  }
+
+  .project-modal__back {
+    padding: 8px 12px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .project-modal__back span:first-child {
+    display: none;
+  }
+
+  .project-modal__close {
+    width: 40px;
+    height: 40px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+  }
+
+  .project-modal__close::before,
+  .project-modal__close::after {
+    width: 14px;
+  }
+
+  .project-modal__gallery {
+    padding: 14px 14px 8px;
+  }
+
+  .project-modal__swiper {
+    max-height: min(42vh, 320px);
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-modal__slide-label {
+    top: 18px;
+    left: 18px;
+    padding: 4px 8px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+
+  .project-modal__pagination-wrap {
+    margin-top: 16px;
+  }
+
+  .project-modal__content {
+    padding:
+      20px
+      max(16px, var(--safe-right))
+      calc(48px + var(--safe-bottom))
+      max(16px, var(--safe-left));
+  }
+
+  .project-modal__label {
+    margin-bottom: 14px;
+    font-size: 10px;
+    letter-spacing: 0.28em;
+  }
+
+  .project-modal__title {
+    font-size: clamp(22px, 6vw, 32px);
+    margin-bottom: 10px;
+  }
+
+  .project-modal__short {
+    margin-bottom: 16px;
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .project-modal__desc {
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .project-modal__tech-title {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .project-modal__tech-list {
+    gap: 8px;
+  }
+
+  .project-modal__tech-list li {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+
+  .project-modal__actions {
+    margin-top: 24px;
+    padding-bottom: 8px;
+  }
+
+  .project-modal__link-button {
+    min-width: 0;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .project-modal__corner {
+    width: 18px;
+    height: 18px;
+  }
+
+  .project-modal__corner--tl { top: 8px; left: 8px; }
+  .project-modal__corner--tr { top: 8px; right: 8px; }
+  .project-modal__corner--bl { bottom: 8px; left: 8px; }
+  .project-modal__corner--br { bottom: 8px; right: 8px; }
+
+  .project-modal__nav {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .project-modal__nav--prev {
+    left: 6px;
+  }
+
+  .project-modal__nav--next {
+    right: 6px;
+  }
+}
+
+/* ─── Маленький телефон ─── */
+@media (max-width: 480px) {
+  .section {
+    padding:
+      clamp(48px, 10vw, 68px)
+      max(clamp(12px, 3.5vw, 16px), var(--safe-left), var(--safe-right));
+  }
+
+  .section-label {
+    display: none; /* освобождаем место на очень узком экране */
+  }
+
+  .hero-content {
+    font-size: 22px;
+  }
+
+  .hero-badge {
+    letter-spacing: 0.12em;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .layers__item {
+    inset: -2vw;
+  }
+
+  .layer-3 {
+    -webkit-transform: translateZ(80px) scale(0.92);
+            transform: translateZ(80px) scale(0.92);
+  }
+
+  .projects-grid {
+    gap: 24px;
+  }
+
+  .project-card:hover .project-media img {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none; /* hover-зум только на десктопе с мышью */
+  }
+
+  .button-start {
+    margin-top: 16px;
+    padding: 0 14px;
+    line-height: 32px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  .about-image,
+  .about-image .glitch-wrap {
+    max-width: min(340px, 84vw);
+  }
+
+  .terminal-header span {
+    width: 10px;
+    height: 10px;
+  }
+
+  .project-modal__link-button {
+    padding: 12px 16px;
+    font-size: 9px;
+  }
+
+  .project-modal__content {
+    padding:
+      18px
+      max(14px, var(--safe-right))
+      calc(44px + var(--safe-bottom))
+      max(14px, var(--safe-left));
+  }
+
+  .project-modal__gallery {
+    padding: 12px 12px 6px;
+  }
+
+  .project-modal__swiper {
+    max-height: min(38vh, 260px);
+  }
+
+  .project-modal__corner {
+    display: none;
+  }
+
+  .project-modal__title {
+    font-size: clamp(20px, 7vw, 26px);
+  }
+
+  .project-modal__desc {
+    font-size: 13px;
+  }
+
+  .project-modal__dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .project-modal__dot.is-active {
+    width: 18px;
+  }
+}
+
+/* ─── Узкие экраны 360px и меньше ─── */
+@media (max-width: 360px) {
+  .project-modal__top {
+    padding:
+      calc(10px + var(--safe-top))
+      max(10px, var(--safe-right))
+      10px
+      max(10px, var(--safe-left));
+    gap: 10px;
+  }
+
+  .project-modal__back {
+    padding: 7px 10px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    max-width: calc(100% - 52px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .project-modal__close {
+    width: 36px;
+    height: 36px;
+  }
+
+  .project-modal__gallery {
+    padding: 10px 10px 6px;
+  }
+
+  .project-modal__swiper {
+    max-height: min(34vh, 220px);
+    border-radius: 2px;
+  }
+
+  .project-modal__slide-label {
+    top: 12px;
+    left: 12px;
+    padding: 3px 6px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .project-modal__nav {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+
+  .project-modal__nav--prev {
+    left: 4px;
+  }
+
+  .project-modal__nav--next {
+    right: 4px;
+  }
+
+  .project-modal__pagination-wrap {
+    margin-top: 12px;
+  }
+
+  .project-modal__content {
+    padding:
+      16px
+      max(12px, var(--safe-right))
+      calc(52px + var(--safe-bottom))
+      max(12px, var(--safe-left));
+  }
+
+  .project-modal__label {
+    margin-bottom: 10px;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+  }
+
+  .project-modal__label::before {
+    width: 16px;
+  }
+
+  .project-modal__title {
+    font-size: clamp(18px, 6.5vw, 22px);
+    padding-right: 0;
+    word-break: break-word;
+  }
+
+  .project-modal__short {
+    margin-bottom: 12px;
+    padding-left: 8px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .project-modal__desc {
+    margin-bottom: 18px;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .project-modal__tech-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .project-modal__tech-list {
+    gap: 6px;
+  }
+
+  .project-modal__tech-list li {
+    padding: 6px 10px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .project-modal__actions {
+    margin-top: 18px;
+    padding-bottom: 12px;
+  }
+
+  .project-modal__link-button {
+    padding: 12px 14px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    gap: 8px;
+  }
+
+  .project-modal__link-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .project-modal__dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .project-modal__dot.is-active {
+    width: 14px;
+  }
+}
+
+/* Hover-эффекты карточек — только там, где есть настоящий hover */
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-media img {
+    -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+            transform: scale(1.05);
+  }
+}
+
+@media (hover: none) {
+  .button-start:hover {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}

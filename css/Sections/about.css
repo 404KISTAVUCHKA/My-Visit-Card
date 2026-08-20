@@ -1,0 +1,147 @@
+.about {
+  overflow: hidden;
+  min-height: 100vh;
+
+
+  background:
+    radial-gradient(ellipse at top left,
+      rgb(33, 12, 54),
+      transparent 45%),
+      
+    radial-gradient(ellipse at left,
+      rgba(33, 12, 54, 0.825),
+      transparent 45%),
+
+    radial-gradient(ellipse at right,
+      rgba(0, 30, 45, 0.781),
+      transparent 45%),
+
+    radial-gradient(ellipse at right bottom,
+      rgba(0, 30, 45, 0.781),
+      transparent 45%),
+
+    #05070c;
+}
+
+.about::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:60px;
+
+  background:-webkit-gradient(
+    linear,
+    left top, left bottom,
+    from(transparent),
+    to(#040404d2)
+  );
+
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    #040404d2
+  );
+}
+
+#particles-canvas{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  opacity:.45;
+}
+
+.about-grid{
+  position:relative;
+  z-index:2;
+
+  display:-ms-grid;
+
+  display:grid;
+  -ms-grid-columns:1fr clamp(60px, 10vw, 160px) 1fr;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(60px, 10vw, 160px);
+  -webkit-box-align:center;
+      -ms-flex-align:center;
+          align-items:center;
+}
+
+.about-text{
+  max-width:620px;
+
+  color:#bdbdbd;
+
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.terminal-card{
+  margin-top:40px;
+  padding:30px;
+
+  border:1px solid rgb(255 255 255 /.08);
+  border-radius:30px;
+
+  background:
+    -webkit-gradient(
+      linear,
+      left top, left bottom,
+      from(rgb(255 255 255 /.06)),
+      to(rgb(255 255 255 /.02))
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 /.06),
+      rgb(255 255 255 /.02)
+    );
+
+  backdrop-filter:blur(30px);
+}
+
+.terminal-header{
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+  gap:10px;
+
+  margin-bottom:25px;
+}
+
+.terminal-header span{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#fff;
+  -webkit-transition: background-color .3s ease;
+  transition: background-color .3s ease, opacity 0.3s;
+}
+
+.terminal-point-1.active {background:#ff5b5f;}
+.terminal-point-2.active {background:#fac700;}
+.terminal-point-3.active {background:#35c759;}
+
+.terminal-point.active{
+  opacity: 1;
+}
+
+.typing-text{
+  color:#d6d6d6;
+
+  font:
+    400 16px/2
+    "Manrope",sans-serif;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}

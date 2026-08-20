@@ -1,0 +1,19 @@
+/* BASE */
+@import url("./css/Base/normalize.css");
+@import url("./css/Base/fonts.css");
+@import url("./css/Base/globals.css");
+@import url("./css/Base/vars.css");
+
+/* SECTIONS */
+@import url("./css/Sections/preloader.css");
+@import url("./css/Sections/hero.css");
+@import url("./css/Sections/section.css");
+@import url("./css/Sections/about.css");
+@import url("./css/Sections/about-glitch.css");
+@import url("./css/Sections/projects.css");
+@import url("./css/Sections/project-modal.css");
+@import url("./css/Sections/contact.css");
+@import url("./css/Sections/footer.css");
+
+/* ADAPTIVE */
+@import url("./css/Sections/adaptive.css");

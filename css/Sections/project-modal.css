@@ -1,0 +1,1004 @@
+.project-card {
+  cursor: pointer;
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   МОДАЛЬНОЕ ОКНО ПРОЕКТА
+   ═══════════════════════════════════════════ */
+
+.project-modal {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  padding: clamp(8px, 1.5vw, 20px);
+
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.project-modal.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+body.project-modal-open {
+  overflow: hidden;
+}
+
+/* Начальное состояние — GSAP анимирует без конфликта с CSS transition */
+.project-modal__shell,
+.project-modal__gallery,
+.project-modal__content {
+  will-change: transform, opacity;
+}
+
+.project-modal:not(.is-open) .project-modal__shell,
+.project-modal:not(.is-open) .project-modal__gallery,
+.project-modal:not(.is-open) .project-modal__content {
+  opacity: 0;
+}
+
+/* Фон модалки — в стиле секций About / Hero */
+.project-modal__backdrop {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(ellipse at top left, rgb(33 12 54 / 0.55), transparent 50%),
+    radial-gradient(ellipse at right, rgb(0 30 45 / 0.5), transparent 50%),
+    rgb(2 2 2 / 0.82);
+
+  backdrop-filter: blur(18px) saturate(1.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+}
+
+/* Внешняя оболочка — центрированная карточка */
+.project-modal__shell {
+  position: relative;
+  z-index: 1;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+
+  width: min(1440px, 96vw);
+  max-height: calc(100dvh - clamp(16px, 3vw, 40px));
+  overflow: hidden;
+
+  border-radius: 4px;
+
+  background:
+    radial-gradient(ellipse at top left, rgb(33 12 54 / 0.35), transparent 55%),
+    radial-gradient(ellipse at right bottom, rgb(0 30 45 / 0.35), transparent 55%),
+    linear-gradient(155deg, rgb(8 10 16 / 0.96), rgb(5 7 12 / 0.98));
+  -webkit-box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 40px 120px rgb(0 0 0 / 0.65),
+    inset 0 1px 0 rgb(255 255 255 / 0.04);
+          box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.06),
+    0 40px 120px rgb(0 0 0 / 0.65),
+    inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+/* Декоративная рамка с угловыми акцентами */
+.project-modal__frame {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.project-modal__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+
+  border: 1px solid transparent;
+  -o-border-image: linear-gradient(
+      135deg,
+      rgb(141 240 255 / 0.35) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgb(168 85 247 / 0.3) 100%
+    )
+    1;
+     border-image: linear-gradient(
+      135deg,
+      rgb(141 240 255 / 0.35) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgb(168 85 247 / 0.3) 100%
+    )
+    1;
+
+  opacity: 0.7;
+}
+
+/* Угловые маркеры в стиле HUD */
+.project-modal__corner {
+  position: absolute;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+
+.project-modal__corner::before,
+.project-modal__corner::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.55;
+}
+
+.project-modal__corner--tl {
+  top: 12px;
+  left: 12px;
+}
+
+.project-modal__corner--tl::before {
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 1px;
+}
+
+.project-modal__corner--tl::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 18px;
+}
+
+.project-modal__corner--tr {
+  top: 12px;
+  right: 12px;
+}
+
+.project-modal__corner--tr::before {
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 1px;
+}
+
+.project-modal__corner--tr::after {
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 18px;
+}
+
+.project-modal__corner--bl {
+  bottom: 12px;
+  left: 12px;
+}
+
+.project-modal__corner--bl::before {
+  bottom: 0;
+  left: 0;
+  width: 18px;
+  height: 1px;
+}
+
+.project-modal__corner--bl::after {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 18px;
+}
+
+.project-modal__corner--br {
+  bottom: 12px;
+  right: 12px;
+}
+
+.project-modal__corner--br::before {
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 1px;
+}
+
+.project-modal__corner--br::after {
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  height: 18px;
+}
+
+/* Сканлайны поверх модалки */
+.project-modal__scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgb(0 0 0 / 0.03) 2px,
+    rgb(0 0 0 / 0.03) 4px
+  );
+
+  opacity: 0.4;
+}
+
+/* ─── Шапка ─── */
+.project-modal__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 16px;
+
+  padding: 20px clamp(20px, 3.5vw, 40px);
+
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  background: rgb(0 0 0 / 0.15);
+}
+
+.project-modal__back {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+
+  padding: 10px 18px;
+
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 2px;
+
+  background: rgb(255 255 255 / 0.03);
+  color: rgb(255 255 255 / 0.85);
+
+  cursor: pointer;
+
+  font:
+    500 12px/1 "Space Grotesk", sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  -webkit-transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    -webkit-transform 0.2s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    -webkit-transform 0.2s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.2s ease,
+    -webkit-transform 0.2s ease;
+}
+
+.project-modal__back:hover {
+  border-color: rgb(141 240 255 / 0.4);
+  background: rgb(141 240 255 / 0.06);
+  color: var(--accent);
+}
+
+.project-modal__back:active {
+  -webkit-transform: scale(0.97);
+      -ms-transform: scale(0.97);
+          transform: scale(0.97);
+}
+
+/* Кнопка закрытия — крест в ромбе */
+.project-modal__close {
+  position: relative;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 2px;
+
+  background: transparent;
+  color: #fff;
+
+  cursor: pointer;
+
+  font-size: 0;
+  line-height: 1;
+
+  -webkit-transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.project-modal__close::before,
+.project-modal__close::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+
+.project-modal__close::before {
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.project-modal__close::after {
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.project-modal__close:hover {
+  border-color: rgb(168 85 247 / 0.5);
+  background: rgb(168 85 247 / 0.08);
+  color: var(--accent-2);
+}
+
+.project-modal__close:active {
+  -webkit-transform: scale(0.94);
+      -ms-transform: scale(0.94);
+          transform: scale(0.94);
+}
+
+/* ─── Тело: галерея + контент ─── */
+.project-modal__body {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -ms-grid-columns: minmax(0, 1.2fr) 0 minmax(300px, 0.8fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 0;
+
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── Галерея / Swiper ─── */
+.project-modal__gallery {
+  position: relative;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  min-height: 0;
+  padding: clamp(24px, 3.5vw, 44px);
+
+  background: transparent;
+}
+
+.project-modal__slide-label {
+  position: absolute;
+  z-index: 6;
+  top: clamp(32px, 4vw, 52px);
+  left: clamp(32px, 4vw, 52px);
+
+  padding: 6px 12px;
+
+  border-left: 2px solid var(--accent);
+  border-radius: 0 2px 2px 0;
+
+  background: rgb(0 0 0 / 0.45);
+  backdrop-filter: blur(10px);
+  color: var(--accent);
+
+  font:
+    500 11px/1 "Space Grotesk", sans-serif;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+/* Контейнер Swiper — кнопки внутри для корректных кликов */
+.project-modal__swiper {
+  position: relative;
+  overflow: hidden;
+
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: calc(100dvh - 260px);
+
+  border-radius: 2px;
+
+  background: rgb(0 0 0 / 0.5);
+  -webkit-box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08),
+    0 24px 64px rgb(0 0 0 / 0.5);
+          box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08),
+    0 24px 64px rgb(0 0 0 / 0.5);
+}
+
+.project-modal__track {
+  height: 100%;
+}
+
+.project-modal__slide {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-modal__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+
+.project-modal__track.swiper-wrapper {
+  -webkit-transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Кнопки навигации Swiper — кастомный дизайн */
+.project-modal__nav {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 2px;
+
+  background: rgb(8 10 14 / 0.8);
+  backdrop-filter: blur(12px);
+  color: #fff;
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  font-size: 22px;
+  line-height: 1;
+
+  -webkit-transform: translateY(-50%);
+
+      -ms-transform: translateY(-50%);
+
+          transform: translateY(-50%);
+
+  -webkit-transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease,
+    -webkit-transform 0.3s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    opacity 0.3s ease,
+    -webkit-transform 0.3s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    -webkit-transform 0.3s ease;
+}
+
+.project-modal__nav::after {
+  display: none;
+}
+
+.project-modal__nav:hover {
+  border-color: rgb(141 240 255 / 0.5);
+  background: rgb(141 240 255 / 0.1);
+  color: var(--accent);
+}
+
+.project-modal__nav:active {
+  -webkit-transform: translateY(-50%) scale(0.94);
+      -ms-transform: translateY(-50%) scale(0.94);
+          transform: translateY(-50%) scale(0.94);
+}
+
+.project-modal__nav.is-disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.project-modal__nav--prev {
+  left: 16px;
+}
+
+.project-modal__nav--next {
+  right: 16px;
+}
+
+/* Пагинация Swiper — точки */
+.project-modal__pagination-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 28px;
+}
+
+.project-modal__dots {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+
+  position: static !important;
+  width: auto !important;
+}
+
+.project-modal__dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 !important;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgb(255 255 255 / 0.2);
+  opacity: 1;
+
+  cursor: pointer;
+
+  -webkit-transition:
+    background 0.3s ease,
+    width 0.3s ease,
+    -webkit-transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-box-shadow 0.3s ease;
+
+  transition:
+    background 0.3s ease,
+    width 0.3s ease,
+    -webkit-transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-box-shadow 0.3s ease;
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    width 0.3s ease;
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    width 0.3s ease,
+    -webkit-transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    -webkit-box-shadow 0.3s ease;
+}
+
+.project-modal__dot.is-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--accent);
+  -webkit-box-shadow: 0 0 20px rgb(141 240 255 / 0.5);
+          box-shadow: 0 0 20px rgb(141 240 255 / 0.5);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
+}
+
+/* ─── Правая колонка: текст ─── */
+.project-modal__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+
+  min-height: 0;
+  padding:
+    clamp(28px, 4vw, 48px)
+    clamp(36px, 5vw, 56px)
+    clamp(28px, 4vw, 48px)
+    clamp(28px, 4vw, 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+
+  background: transparent;
+}
+
+.project-modal__label {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  color: var(--accent);
+
+  font:
+    500 11px/1 "Space Grotesk", sans-serif;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+.project-modal__label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.project-modal__title {
+  margin-bottom: 14px;
+  padding-right: 12px;
+
+  overflow-wrap: break-word;
+
+  font-family: Syne, sans-serif;
+  font-size: clamp(30px, 3.5vw, 48px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.project-modal__short {
+  margin: 0 0 24px;
+  padding-left: 14px;
+
+  border-left: 2px solid rgb(168 85 247 / 0.5);
+
+  color: rgb(200 220 230 / 0.9);
+
+  font:
+    400 15px/1.75 "Space Grotesk", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.project-modal__desc {
+  margin: 0 0 36px;
+
+  color: #a8a8a8;
+
+  font:
+    400 16px/1.85 "Space Grotesk", sans-serif;
+}
+
+.project-modal__tech-title {
+  margin-bottom: 16px;
+
+  font-family: Syne, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.7);
+}
+
+.project-modal__tech-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 10px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.project-modal__tech-list li {
+  padding: 10px 16px;
+
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 2px;
+
+  background: rgb(255 255 255 / 0.03);
+  color: #ddd;
+
+  font:
+    500 11px/1 "Space Grotesk", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  -webkit-transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.project-modal__tech-list li:hover {
+  border-color: rgb(141 240 255 / 0.25);
+  background: rgb(141 240 255 / 0.05);
+}
+
+.project-modal__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+
+  margin-top: 32px;
+}
+
+.project-modal__link-button {
+  position: relative;
+  overflow: hidden;
+
+  display: -webkit-inline-box;
+
+  display: -ms-inline-flexbox;
+
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 12px;
+
+  min-width: 240px;
+  padding: 18px 28px;
+
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 100px;
+
+  background:
+    -webkit-gradient(
+      linear,
+      left top, left bottom,
+      from(rgb(255 255 255 / 0.08)),
+      to(rgb(255 255 255 / 0.02))
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.08),
+      rgb(255 255 255 / 0.02)
+    );
+
+  color: #fff;
+
+  font:
+    700 12px/1
+    "Space Grotesk", sans-serif;
+
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+
+  -webkit-transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    -webkit-transform 0.35s ease,
+    -webkit-box-shadow 0.35s ease;
+
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    -webkit-transform 0.35s ease,
+    -webkit-box-shadow 0.35s ease;
+
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    -webkit-transform 0.35s ease,
+    -webkit-box-shadow 0.35s ease;
+}
+
+.project-modal__link-button span {
+  position: relative;
+  z-index: 1;
+}
+
+.project-modal__link-button svg {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  width: 16px;
+  height: 16px;
+
+  -webkit-transition: -webkit-transform 0.35s ease;
+
+  transition: -webkit-transform 0.35s ease;
+
+  transition: transform 0.35s ease;
+
+  transition: transform 0.35s ease, -webkit-transform 0.35s ease;
+}
+
+.project-modal__link-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  -webkit-transform: translateY(100%);
+
+      -ms-transform: translateY(100%);
+
+          transform: translateY(100%);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-2)
+    );
+
+  -webkit-transition: -webkit-transform 0.45s ease;
+
+  transition: -webkit-transform 0.45s ease;
+
+  transition: transform 0.45s ease;
+
+  transition: transform 0.45s ease, -webkit-transform 0.45s ease;
+}
+
+.project-modal__link-button:hover {
+  border-color: rgb(141 240 255 / 0.35);
+  color: #000;
+  -webkit-transform: translateY(-2px);
+      -ms-transform: translateY(-2px);
+          transform: translateY(-2px);
+  -webkit-box-shadow: 0 12px 32px rgb(141 240 255 / 0.12);
+          box-shadow: 0 12px 32px rgb(141 240 255 / 0.12);
+}
+
+.project-modal__link-button:hover::before {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+}
+
+.project-modal__link-button:active {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+}

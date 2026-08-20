@@ -1,0 +1,128 @@
+/* ========== MANROPE ========== */
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope Extra Bold"), local("Manrope-Extra Bold"),
+  url(../../fonts/Manrope/Manrope-ExtraBold.woff2) format(woff2);
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope Bold"), local("Manrope-Bold"),
+  url(../../fonts/Manrope/Manrope-Bold.woff2) format(woff2);
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope SemiBold"), local("Manrope-SemiBold"),
+  url(../../fonts/Manrope/Manrope-SemiBold.woff2) format(woff2);
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope Medium"), local("Manrope-Medium"),
+  url(../../fonts/Manrope/Manrope-Medium.woff2) format(woff2);
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope Regular"), local("Manrope-Regular"),
+  url(../../fonts/Manrope/Manrope-Regular.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope Light"), local("Manrope-Light"),
+  url(../../fonts/Manrope/Manrope-Light.woff2) format(woff2);
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: 
+  local("Manrope ExtraLight"), local("Manrope-ExtraLight"),
+  url(../../fonts/Manrope/Manrope-ExtraLight.woff2) format(woff2);
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========== BOUNDED ========== */
+
+@font-face {
+  font-family: "Bounded";
+  src: 
+  local("Bounded Black"), local("Bounded-Black"),
+  url(../../fonts/Bounded/Bounded-Black.woff2) format(woff2);
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bounded";
+  src: 
+  local("Bounded Regular"), local("Bounded-Regular"),
+  url(../../fonts/Bounded/Bounded-Regular.woff2) format(woff2);
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bounded";
+  src: 
+  local("Bounded ExtraLight"), local("Bounded-ExtraLight"),
+  url(../../fonts/Bounded/Bounded-ExtraLight.woff2) format(woff2);
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bounded";
+  src: 
+  local("Bounded Variable"), local("Bounded-Variable"),
+  url(../../fonts/Bounded/Bounded-Variable.woff2) format(woff2);
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========== KAMERIK-3D ========== */
+
+@font-face{
+  font-family:kamerik-3d;
+  src:url(../fonts/kamerik205-heavy.woff2);
+  font-weight:900;
+}
+
+/* ========== MERRIWEATHER ========== */
+
+@font-face{
+  font-family:merriweather-italic-3d;
+  src:url(../fonts/merriweather-regular-italic.woff2);
+}

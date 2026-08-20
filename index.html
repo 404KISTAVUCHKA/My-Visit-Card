@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="ru" class="preloader-active">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Если прелоадер уже был в этой вкладке — не блокируем страницу до загрузки JS -->
+    <script>
+      (function () {
+        try {
+          if (sessionStorage.getItem("preloader-shown") === "1") {
+            document.documentElement.classList.remove("preloader-active");
+            document.documentElement.dataset.skipPreloader = "";
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>PAVLISHENKO</title>
+
+    <link rel="stylesheet" href="./index.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Подключение Swiper -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"
+      defer
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      sizes="128x128"
+      href="./img/favicon/favicon.svg"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Данные проектов -->
+    <script>
+      window.PROJECTS_DATA = [
+        {
+          title: "Nike Air Mag",
+          short:
+            "Лендинг легендарных кроссовок из «Назад в будущее» с футуристичным оформлением и жёлтыми акцентами.",
+          description:
+            "Одностраничный продуктовый сайт для Nike Air Mag: крупная типографика, светящийся силуэт кроссовка на тёмном фоне, блок характеристик и навигация по разделам «Размеры» и «Другие ТОП модели». Акцент на премиальность и технологичность — от описания амортизации до кнопки «Сделать заказ».",
+          tech: ["HTML", "CSS", "JavaScript"],
+          link: [
+            "https://404kistavuchka.github.io/HomeWork/HTML%20&%20CSS/Footer/index.html",
+          ],
+          images: [
+            "./img/projects/Nike/Nike-1.webp",
+            "./img/projects/Nike/Nike-2.webp",
+            "./img/projects/Nike/Nike-3.webp",
+            "./img/projects/Nike/Nike-4.webp",
+          ],
+        },
+        {
+          title: "Dyson Supersonic",
+          short:
+            "Минималистичный лендинг линейки ухода за волосами с контрастными снимками и розовыми акцентами.",
+          description:
+            "Страница в фирменном стиле Dyson: чёрная шапка с навигацией, светлый hero-блок и цветной акцент на фене Supersonic на чёрно-белом портрете. Разделы «О нас», доставка, регистрация продукта и сервис — всё выстроено вокруг идеи инновационного ухода за волосами.",
+          tech: ["HTML", "CSS", "JavaScript"],
+          link: [
+            "https://404kistavuchka.github.io/HomeWork/JS/Dyson/index.html",
+          ],
+          images: [
+            "./img/projects/Dyson/Dyson-1.webp",
+            "./img/projects/Dyson/Dyson-2.webp",
+            "./img/projects/Dyson/Dyson-3.webp",
+            "./img/projects/Dyson/Dyson-4.webp",
+            "./img/projects/Dyson/Dyson-5.webp",
+          ],
+        },
+        {
+          title: "Hazze",
+          short:
+            "Сайт модного бренда в неоновой эстетике: hero, портфолио и editorial-съёмки.",
+          description:
+            "Многостраничный концепт для бренда Hazze — тёмный фон, розовые акценты и кинематографичные фото. Главная с блоком New Fashion, портфолио с сеткой работ, страницы About, Blog и Contact с единой типографикой и hover-эффектами на карточках.",
+          tech: ["HTML", "CSS", "JavaScript", "WordPress", "PHP"],
+          link: ["#"],
+          images: [
+            "./img/projects/Hazze/Hazze-1.webp",
+            "./img/projects/Hazze/Hazze-2.webp",
+            "./img/projects/Hazze/Hazze-3.webp",
+            "./img/projects/Hazze/Hazze-4.webp",
+            "./img/projects/Hazze/Hazze-5.webp",
+            "./img/projects/Hazze/Hazze-6.webp",
+            "./img/projects/Hazze/Hazze-7.webp",
+            "./img/projects/Hazze/Hazze-8.webp",
+            "./img/projects/Hazze/Hazze-9.webp",
+          ],
+        },
+        {
+          title: "Fit Studio",
+          short:
+            "Лендинг фитнес-студии с программой тренировок, карточками тренеров и светлой UI-системой.",
+          description:
+            "Сайт студии Fit Studio: hero с призывом «Подтянутое тело за месяц тренировок», блок выбора тренера, расписание и описание программ. Синие акценты, контрастные фото атлетов, бесплатное первое посещение и чистая сетка на белом фоне.",
+          tech: ["HTML", "CSS", "JavaScript"],
+          link: [
+            "https://404kistavuchka.github.io/HomeWork/HTML%20&%20CSS/BEM/index.html",
+          ],
+          images: [
+            "./img/projects/Fitness/FitStudio-1.webp",
+            "./img/projects/Fitness/FitStudio-2.webp",
+            "./img/projects/Fitness/FitStudio-3.webp",
+            "./img/projects/Fitness/FitStudio-4.webp",
+            "./img/projects/Fitness/FitStudio-5.webp",
+          ],
+        },
+        {
+          title: "Список дел",
+          short:
+            "Минималистичное to-do приложение с тёмной темой и быстрым управлением задачами.",
+          description:
+            "Интерактивный список задач: добавление новых пунктов, отметка выполненных и удаление. Тёмный интерфейс с фиолетовыми кнопками «Добавить», зачёркивание завершённых дел и компактная вёрстка для ежедневного использования.",
+          tech: ["HTML", "CSS", "JavaScript"],
+          link: [
+            "https://404kistavuchka.github.io/HomeWork/JS/Modules/index.html",
+          ],
+          images: ["./img/projects/Todo/Todo-1.webp"],
+        },
+        {
+          title: "Travela",
+          short:
+            "Туристический сервис с полноэкранным hero, каталогом туров и карточками направлений.",
+          description:
+            "Сайт путешествий Travela: слайдер на фоне горных маршрутов, блок «Explore the World», каталог туров и отзывы путешественников. Синяя цветовая система, карточки направлений, форма бронирования и адаптивная сетка для поиска поездок.",
+          tech: ["HTML", "CSS", "JavaScript", "WordPress", "PHP"],
+          link: ["https://github.com/404KISTAVUCHKA/HomeWork"],
+          images: [
+            "./img/projects/Travela/Travela-1.webp",
+            "./img/projects/Travela/Travela-2.webp",
+            "./img/projects/Travela/Travela-3.webp",
+            "./img/projects/Travela/Travela-4.webp",
+            "./img/projects/Travela/Travela-5.webp",
+            "./img/projects/Travela/Travela-6.webp",
+          ],
+        },
+      ];
+    </script>
+
+    <!-- Загрузчик JS -->
+    <script src="js/script.js" defer></script>
+  </head>
+
+  <body class="preloader-active">
+    <script>
+      if (document.documentElement.dataset.skipPreloader !== undefined) {
+        document.body.classList.remove("preloader-active");
+      }
+    </script>
+
+    <!-------------------- HERO -------------------->
+    <!-------------------- HERO -------------------->
+    <!-------------------- HERO -------------------->
+
+    <section class="hero" id="hero">
+      <section class="layers">
+        <div class="layers__container">
+          <div
+            class="layers__item layer-1"
+            style="background-image: url(img/layers/layer-1.webp)"
+          ></div>
+
+          <div
+            class="layers__item layer-2"
+            style="background-image: url(img/layers/layer-2.webp)"
+          ></div>
+
+          <div class="layers__item layer-3">
+            <div class="hero-content">
+              <div class="hero-badge">FRONTEND / CREATIVE / DESIGN</div>
+
+              <h1 class="hero-title">
+                Создаю цифровые интерфейсы
+                <span>где код, дизайн и анимация работают вместе</span>
+              </h1>
+
+              <div class="hero-content__p">
+                Вёрстка, интерактив и визуальные эффекты — от идеи до
+                работающего продукта в браузере.
+              </div>
+
+              <a class="button-start" href="#second">Исследовать дальше</a>
+            </div>
+          </div>
+
+          <div class="layers__item layer-4">
+            <canvas class="rain"></canvas>
+          </div>
+
+          <div
+            class="layers__item layer-5"
+            style="background-image: url(img/layers/layer-3.webp)"
+          ></div>
+        </div>
+      </section>
+    </section>
+
+    <!-------------------- ABOUT -------------------->
+    <!-------------------- ABOUT -------------------->
+    <!-------------------- ABOUT -------------------->
+
+    <section class="about section" id="second">
+      <canvas id="particles-canvas"></canvas>
+
+      <div class="section-label">{ 01 }</div>
+
+      <div class="about-grid">
+        <div class="about-left reveal">
+          <div class="section-title-wrap">
+            <span class="section-subtitle">About me</span>
+
+            <h2 class="section-title about-title">
+              Приветствую на моей визитной карточке
+            </h2>
+          </div>
+
+          <p class="about-text">
+            Меня зовут Антон, я учусь на втором курсе факультета информационных
+            наук и технологий и параллельно осваиваю веб-разработку. Пока я в
+            начале пути, но уже собираю проекты от лендингов до интерактивных
+            интерфейсов — учусь на практике, прокачиваю стек и ищу задачи, где
+            можно расти вместе с продуктом.
+          </p>
+
+          <div class="terminal-card">
+            <div class="terminal-header">
+              <span class="terminal-point terminal-point-1"></span>
+              <span class="terminal-point terminal-point-2"></span>
+              <span class="terminal-point terminal-point-3"></span>
+            </div>
+
+            <div class="typing-text">
+              > const developer = {
+              <br />
+              > &nbsp;&nbsp;name: "Anton Ivashcenko",
+              <br />
+              > &nbsp;&nbsp;stack: ["HTML", "CSS", "JS", "WordPress", "PHP"],
+              <br />
+              > &nbsp;&nbsp;mission: "Творить и создавать"
+              <br />
+              > }
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right reveal">
+          <div class="about-image">
+            <div class="scene">
+              <div class="glitch-wrap" id="glitchWrap">
+                <!-- Основное фото -->
+                <img
+                  class="base"
+                  id="mainPhoto"
+                  src="./img/my photo/MyPhoto2.webp"
+                  alt="фото этого больного веб-разработчика"
+                />
+                <!-- RGB слои для эффекта №1 -->
+                <img
+                  class="rgb r"
+                  id="redLayer"
+                  src="./img/my photo/MyPhoto2.webp"
+                  alt=""
+                />
+                <img
+                  class="rgb b"
+                  id="blueLayer"
+                  src="./img/my photo/MyPhoto2.webp"
+                  alt=""
+                />
+                <canvas id="fxCanvas"></canvas>
+                <div class="cyber-glow"></div>
+                <div class="vhs"></div>
+                <div class="flicker"></div>
+                <div class="scanlines"></div>
+                <div class="grain"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-------------------- PROJECTS -------------------->
+    <!-------------------- PROJECTS -------------------->
+    <!-------------------- PROJECTS -------------------->
+
+    <section class="projects section" id="projects">
+      <div class="section-label">{ 02 }</div>
+
+      <div class="section-title-wrap reveal">
+        <span class="section-subtitle">Portfolio</span>
+
+        <h2 class="section-title">Мои работы</h2>
+      </div>
+
+      <div class="projects-grid">
+        <article
+          class="project-card reveal"
+          data-project-index="0"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Nike Air Mag"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Nike/Nike-1.webp"
+              alt="Превью проекта Nike Air Mag"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Nike Air Mag</h3>
+            <p>
+              Лендинг легендарных кроссовок из «Назад в будущее» с футуристичным
+              оформлением и жёлтыми акцентами.
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          data-project-index="1"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Dyson Supersonic"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Dyson/Dyson-1.webp"
+              alt="Превью проекта Dyson Supersonic"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Dyson Supersonic</h3>
+            <p>
+              Минималистичный лендинг линейки ухода за волосами с контрастными
+              снимками и розовыми акцентами.
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          data-project-index="2"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Hazze"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Hazze/Hazze-1.webp"
+              alt="Превью проекта Hazze"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Hazze</h3>
+            <p>
+              Сайт модного бренда в неоновой эстетике: hero, портфолио и
+              editorial-съёмки.
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          data-project-index="3"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Fit Studio"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Fitness/FitStudio-1.webp"
+              alt="Превью проекта Fit Studio"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Fit Studio</h3>
+            <p>
+              Лендинг фитнес-студии с программой тренировок, карточками тренеров
+              и светлой UI-системой.
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          data-project-index="4"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Список дел"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Todo/Todo-1.webp"
+              alt="Превью проекта Список дел"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Список дел</h3>
+            <p>
+              Минималистичное to-do приложение с тёмной темой и быстрым
+              управлением задачами.
+            </p>
+          </div>
+        </article>
+
+        <article
+          class="project-card reveal"
+          data-project-index="5"
+          role="button"
+          tabindex="0"
+          aria-label="Открыть проект Travela"
+        >
+          <div class="project-media">
+            <img
+              src="./img/projects/Travela/Travela-1.webp"
+              alt="Превью проекта Travela"
+              loading="lazy"
+            />
+          </div>
+          <div class="project-body">
+            <h3>Travela</h3>
+            <p>
+              Туристический сервис с полноэкранным hero, каталогом туров и
+              карточками направлений.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-------------------- PROJECTS MODAL -------------------->
+    <!-------------------- PROJECTS MODAL -------------------->
+    <!-------------------- PROJECTS MODAL -------------------->
+
+    <div
+      class="project-modal"
+      id="projectModal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="projectModalTitle"
+    >
+      <div class="project-modal__backdrop" data-close></div>
+
+      <div class="project-modal__shell">
+        <div class="project-modal__frame">
+          <span
+            class="project-modal__corner project-modal__corner--tl"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="project-modal__corner project-modal__corner--tr"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="project-modal__corner project-modal__corner--bl"
+            aria-hidden="true"
+          ></span>
+          <span
+            class="project-modal__corner project-modal__corner--br"
+            aria-hidden="true"
+          ></span>
+          <div class="project-modal__scanlines" aria-hidden="true"></div>
+
+          <header class="project-modal__top">
+            <button type="button" class="project-modal__back" data-close>
+              <span aria-hidden="true">←</span>
+              К проектам
+            </button>
+
+            <button
+              type="button"
+              class="project-modal__close"
+              data-close
+              aria-label="Закрыть"
+            ></button>
+          </header>
+
+          <div class="project-modal__body">
+            <div class="project-modal__gallery">
+              <span class="project-modal__slide-label">img - 01</span>
+
+              <div class="swiper project-modal__swiper">
+                <div class="swiper-wrapper project-modal__track"></div>
+
+                <button
+                  type="button"
+                  class="project-modal__nav project-modal__nav--prev"
+                  aria-label="Предыдущий слайд"
+                >
+                  ‹
+                </button>
+
+                <button
+                  type="button"
+                  class="project-modal__nav project-modal__nav--next"
+                  aria-label="Следующий слайд"
+                >
+                  ›
+                </button>
+              </div>
+
+              <div class="project-modal__pagination-wrap">
+                <div class="project-modal__dots"></div>
+              </div>
+            </div>
+
+            <div class="project-modal__content">
+              <span class="project-modal__label">About project</span>
+
+              <h2 class="project-modal__title" id="projectModalTitle"></h2>
+
+              <p class="project-modal__short"></p>
+
+              <p class="project-modal__desc"></p>
+
+              <h3 class="project-modal__tech-title">Технологии</h3>
+
+              <ul class="project-modal__tech-list"></ul>
+
+              <div class="project-modal__actions">
+                <a
+                  class="project-modal__link-button"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Перейти на проект</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M7 17L17 7M17 7H8M17 7v9"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-------------------- CONTACT -------------------->
+    <!-------------------- CONTACT -------------------->
+    <!-------------------- CONTACT -------------------->
+
+    <section class="contact section" id="contact">
+      <div class="contact__bg" aria-hidden="true">
+        <div class="contact__grid"></div>
+        <div class="contact__orb contact__orb--1"></div>
+        <div class="contact__orb contact__orb--2"></div>
+        <div class="contact__orb contact__orb--3"></div>
+      </div>
+
+      <div class="section-label">{ 03 }</div>
+
+      <div class="contact-wrapper reveal">
+        <div class="contact-info">
+          <span class="section-subtitle">Contact</span>
+
+          <h2 class="section-title">Готов взяться за ваш следующий проект</h2>
+
+          <p>
+            Нужен сайт, лендинг или интерфейс? Опишите задачу — отвечу в течение
+            24 часов с планом работ и честной оценкой сроков. Давайте сделаем
+            продукт, который выглядит так же убедительно, как работает.
+          </p>
+        </div>
+
+        <form class="contact-form">
+          <div class="input-box">
+            <input type="text" required />
+            <label>Ваше имя</label>
+          </div>
+
+          <div class="input-box">
+            <input type="email" required />
+            <label>Email</label>
+          </div>
+
+          <div class="input-box textarea-box">
+            <textarea required></textarea>
+            <label>Сообщение</label>
+          </div>
+
+          <button type="submit" class="send-btn">
+            <span>Отправить</span>
+            <div class="liquid"></div>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-------------------- FOOTER -------------------->
+    <!-------------------- FOOTER -------------------->
+    <!-------------------- FOOTER -------------------->
+
+    <footer class="footer">
+      <div class="footer__left">© 2026 / FRONTEND-DEVELOPER</div>
+
+      <nav class="footer__social" aria-label="Социальные сети">
+        <a
+          href="https://t.me/KISTAVUCHKA"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Telegram"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M22 3L2 11l7 3 3 7 10-18z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M9 14l11-11"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </a>
+
+        <a
+          href="https://github.com/404KISTAVUCHKA"
+          class="footer__social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.085.636-1.334-2.22-.276-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.032 2.747-1.032.546 1.377.203 2.394.1 2.65.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.579.688.481C19.138 20.145 22 16.379 22 12.021 22 6.484 17.523 2 12 2z"
+              fill="currentColor"
+            />
+          </svg>
+        </a>
+
+        <a
+          href="mailto:antonivashcenko414@gmail.com"
+          class="footer__social-link"
+          aria-label="Gmail"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M3 7l9 6 9-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </nav>
+
+      <div class="footer__right">Create by Pavlishenko</div>
+    </footer>
+
+    <!-------------------- PRELOADER -------------------->
+    <!-------------------- PRELOADER -------------------->
+    <!-------------------- PRELOADER -------------------->
+
+    <div class="preloader" id="preloader">
+      <div class="panel panel-top"></div>
+      <div class="panel panel-bottom"></div>
+
+      <div class="brand" id="brand">
+        <div class="brand-text" id="brandText">PAVLISHENKO</div>
+
+        <div class="logo-wrap" id="logoWrap">
+          <div class="fallback-logo" id="fallbackLogo">P</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

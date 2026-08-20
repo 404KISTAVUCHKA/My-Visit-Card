@@ -1,0 +1,54 @@
+.section{
+  position:relative;
+
+  padding:
+    var(--section-pad-y)
+    var(--section-pad-x);
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgb(75 0 130 /.18),
+      transparent 45%
+    ),
+    #040404;
+}
+
+.section-label{
+  position:absolute;
+  top:60px;
+  right:60px;
+
+  font-size:14px;
+  letter-spacing:.4em;
+
+  opacity:.4;
+
+  font-family:"Space Grotesk",sans-serif;
+}
+
+.section-title-wrap{
+  margin-bottom:40px;
+}
+
+.section-subtitle{
+  display:inline-block;
+
+  margin-bottom:18px;
+
+  color:var(--accent);
+
+  font-size:14px;
+  letter-spacing:.3em;
+
+  text-transform:uppercase;
+
+  font-family:"Space Grotesk",sans-serif;
+}
+
+.section-title{
+  max-width:900px;
+  font-size:clamp(36px, 5vw + 1rem, 62px);
+  font-family:"Manrope",sans-serif;
+  line-height:1.05;
+}
